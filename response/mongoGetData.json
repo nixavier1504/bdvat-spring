@@ -1,0 +1,12 @@
+[
+    {
+        "uid": 936290216,
+        "executionid": "20200108171824",
+        "username": "user1",
+        "data": "[{\"fieldName\":\"tvsBrandId\",\"dataType\":\"StringType\",\"isSelected\":\"false\",\"id\":1},{\"fieldName\":\"tvsBrandName\",\"dataType\":\"StringType\",\"isSelected\":\"false\",\"id\":2},{\"fieldName\":\"tvsServiceName\",\"dataType\":\"StringType\",\"isSelected\":\"false\",\"id\":3},{\"fieldName\":\"tvsServiceStatus\",\"dataType\":\"StringType\",\"isSelected\":\"false\",\"id\":4},{\"fieldName\":\"tvsBrandType\",\"dataType\":\"StringType\",\"isSelected\":\"false\",\"id\":5},{\"fieldName\":\"key\",\"dataType\":\"IntegerType\",\"isSelected\":\"true\",\"id\":6},{\"exec_id\":\"20200108171824\"}]",
+        "timestamp": "2020.01.08 17.18.32",
+        "dataset": "/Users/amitkumar647/Downloads/test/",
+        "mode": "schema",
+        "profile": "medusa"
+    }
+]

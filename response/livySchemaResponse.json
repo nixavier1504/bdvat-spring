@@ -1,0 +1,12 @@
+{
+    "output": {
+        "data": {
+            "text/plain": "warning: there was one deprecation warning; re-run with -deprecation for details\nimport org.apache.spark.sql.SQLContext\nschemaParquet: (path: String)Array[String]\nschema: Array[String] = Array(key, tvsBrandId, tvsBrandName, tvsBrandType, tvsServiceName, tvsServiceStatus)\n"
+        },
+        "execution_count": 0,
+        "status": "ok"
+    },
+    "statementId": 0,
+    "sessionId": "1",
+    "state": "available"
+}

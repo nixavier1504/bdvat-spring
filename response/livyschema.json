@@ -1,0 +1,42 @@
+[
+    {
+        "fieldName": "tvsBrandId",
+        "dataType": "StringType",
+        "isSelected": "false",
+        "id": 1
+    },
+    {
+        "fieldName": "tvsBrandName",
+        "dataType": "StringType",
+        "isSelected": "false",
+        "id": 2
+    },
+    {
+        "fieldName": "tvsServiceName",
+        "dataType": "StringType",
+        "isSelected": "false",
+        "id": 3
+    },
+    {
+        "fieldName": "tvsServiceStatus",
+        "dataType": "StringType",
+        "isSelected": "false",
+        "id": 4
+    },
+    {
+        "fieldName": "tvsBrandType",
+        "dataType": "StringType",
+        "isSelected": "false",
+        "id": 5
+    },
+    {
+        "fieldName": "key",
+        "dataType": "IntegerType",
+        "isSelected": "true",
+        "id": 6
+    },
+    {
+        "exec_id": "20200108171824"
+    }
+]
+

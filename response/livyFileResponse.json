@@ -1,0 +1,11 @@
+{
+    "output": {
+        "data": {
+            "text/plain": "import java.io.File\ngetListOfFiles: (dir: String)List[java.io.File]\nfiles: List[java.io.File] = List(/Users/amitkumar647/Downloads/.DS_Store, /Users/amitkumar647/Downloads/.localized, /Users/amitkumar647/Downloads/.classpath, /Users/amitkumar647/Downloads/.project, /Users/amitkumar647/Downloads/first.parquet)\n"
+        },
+        "execution_count": 0,
+        "status": "ok"
+    },
+    "statementId": 0,
+    "sessionId": "9"
+}

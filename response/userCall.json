@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "username": "user1",
+        "profile": "Medusa",
+        "dataset": "[\"/a/b/c/\", \"/x/y/z\"]"
+    },
+    {
+        "id": 1,
+        "username": "user1",
+        "profile": "Meteor",
+        "dataset": "[\"/g/g/d/\"]"
+    }
+]
