@@ -53,7 +53,7 @@ public class GetSessionIdUser {
 		System.out.println("Operation done successfully");
 		String content=null;
 		HttpClient httpclient = HttpClients.createDefault();
-		HttpGet httppost = new HttpGet("http://localhost:8998/sessions/"+id);
+		HttpGet httppost = new HttpGet("http://13.127.233.209:8998/sessions/"+id);
 		httppost.setHeader("Accept", "application/json");
 		httppost.setHeader("Content-type", "application/json");
 		httppost.setHeader("X-Requested-By", "sharjain");
@@ -87,7 +87,7 @@ public class GetSessionIdUser {
 		} else {
 			System.out.println("creating new session");
 			HttpClient httpclient1 = HttpClients.createDefault();
-			HttpPost httppost1 = new HttpPost("http://localhost:8998/sessions/");
+			HttpPost httppost1 = new HttpPost("http://13.127.233.209:8998/sessions/");
 			String content1=null;
 			String json = "{\n\t\"kind\": \"spark\"\n}";
 			StringEntity entity1 = new StringEntity(json);
@@ -119,7 +119,7 @@ public class GetSessionIdUser {
 			while(  !status_of_session.equals("idle")  ) {
 				TimeUnit.SECONDS.sleep(5);
 				System.out.println("loop");
-				HttpGet getre = new HttpGet("http://localhost:8998/sessions/"+newsessid);
+				HttpGet getre = new HttpGet("http://13.127.233.209:8998/sessions/"+newsessid);
 				getre.setHeader("Accept", "application/json");
 				getre.setHeader("Content-type", "application/json");
 				getre.setHeader("X-Requested-By", "sharjain");

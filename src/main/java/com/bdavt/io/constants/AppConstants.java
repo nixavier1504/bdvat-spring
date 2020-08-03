@@ -14,7 +14,7 @@ public class AppConstants {
 	
 	public static String ID="id";
 	public static String LIVY_PORT="8998";
-	public static String LIVY_HOSTNAME="localhost";
+	public static String LIVY_HOSTNAME="13.127.233.209";
 	public static long LIVY_POST_HOLD=10;
 	
 	public static String RESPONSE_OUTPUT="output";
@@ -28,6 +28,7 @@ public class AppConstants {
 	public static String RESPONSE_STATE="state";
 	public static String RESPONSE_STATE_AVAILABLE="available";
 	public static String RESPONSE_STATE_WAIT="waiting";
+	public static String RESPONSE_STATE_DEAD="dead";
 	
 	public static String TRUE="true";
 	public static String FALSE="false";
@@ -51,20 +52,20 @@ public class AppConstants {
 	
 	//********POSTGRES SNET**************
 	
-	public static String POSTGRES_USERNAME="bavtuser";
-	public static String POSTGRES_PASSWORD="bavtuser";
-	public static String POSTGRES_DB="bavtdb";
-	public static String POSTGRES_HOSTNAME="10.118.62.209";
-	public static String POSTGRES_PORT="5432";
-	
+//	public static String POSTGRES_USERNAME="bavtuser";
+//	public static String POSTGRES_PASSWORD="bavtuser";
+//	public static String POSTGRES_DB="bavtdb";
+//	public static String POSTGRES_HOSTNAME="10.118.62.209";
+//	public static String POSTGRES_PORT="5432";
+//	
 	//********POSTGRES LOCAL*************
-	/*
-	public static String POSTGRES_USERNAME="amitkumar647";
-	public static String POSTGRES_PASSWORD="";
-	public static String POSTGRES_DB="amitkumar647";
+	
+	public static String POSTGRES_USERNAME="postgres";
+	public static String POSTGRES_PASSWORD="password";
+	public static String POSTGRES_DB="bdvat";
 	public static String POSTGRES_HOSTNAME="localhost";
 	public static String POSTGRES_PORT="5432";
-	*/
+	
 	
 	//********MONGODB SNET***************
 	public static String MONGO_KEYCOLUMN="username";
