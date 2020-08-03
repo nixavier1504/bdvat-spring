@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bdavt.io.model.datacomparison;
-import com.bdavt.io.model.statistics;
-import com.bdavt.io.model.userSchema;
-import com.bdavt.io.model.userSchemanullcount;
 import com.bdavt.io.model.request.BinStats;
 import com.bdavt.io.model.request.CompStats;
 import com.bdavt.io.model.request.Correlation;
@@ -36,49 +32,49 @@ public class LivyController {
 	@CrossOrigin(origins = "*")
 	@PostMapping("/schema")
 	public JSONArray getSchema(@RequestBody Schema payload) throws Exception {
-		Long sessionId = session.getSession("spark", payload.getUsername());
+		Long sessionId = session.getSparkSession(payload.getUsername());
 		return analysis.getSchema(sessionId, payload.getDataset());
 	}
 	
 	@CrossOrigin(origins = "*")
 	@PostMapping("/stats")
 	public JSONArray getDescriptiveAnalysis(@RequestBody DescriptiveAnalysis payload) throws Exception {
-		Long sessionId = session.getSession("pyspark", payload.getUsername());
+		Long sessionId = session.getPySparkSession(payload.getUsername());
 		return analysis.getDescriptiveAnalysis(sessionId, payload.getDataset(), payload.getColumns());
 	}
 	
 	@CrossOrigin(origins = "*")
 	@PostMapping("/correlation")
 	public JSONObject getCorrelation(@RequestBody Correlation payload) throws Exception {
-		Long sessionId = session.getSession("pyspark", payload.getUsername());
+		Long sessionId = session.getPySparkSession(payload.getUsername());
 		return analysis.getCorrelation(sessionId, payload.getDataset(), payload.getColumns());
 	}
 	
 	@CrossOrigin(origins = "*")
 	@PostMapping("/predictive")
 	public JSONArray getPrecitiveAnalysis(@RequestBody PredictiveAnalysis payload) throws Exception {
-		Long sessionId = session.getSession("pyspark", payload.getUsername());
+		Long sessionId = session.getPySparkSession(payload.getUsername());
 		return analysis.getPredictiveAnalysis(sessionId, payload.getDataset(), payload.getColumns(), payload.getThresholdPercantage());
 	}
 	
 	@CrossOrigin(origins = "*")
 	@PostMapping("/nullcount")
 	public JSONObject getNullCount(@RequestBody NullCount payload) throws Exception {
-		Long sessionId = session.getSession("spark", payload.getUsername());
+		Long sessionId = session.getSparkSession(payload.getUsername());
 		return analysis.getNullCount(sessionId, payload.getDataset(), payload.getColumn());
 	}
 	
 	@CrossOrigin(origins = "*")
 	@PostMapping("/binstats")
 	public JSONObject getBinStats(@RequestBody BinStats payload) throws Exception {
-		Long sessionId = session.getSession("pyspark", payload.getUsername());
+		Long sessionId = session.getPySparkSession(payload.getUsername());
 		return analysis.getBinStats(sessionId, payload.getDataset(), payload.getColumns());
 	}
 	
 	@CrossOrigin(origins = "*")
 	@PostMapping("/compstats")
 	public JSONArray getCompStats(@RequestBody CompStats payload) throws Exception {
-		Long sessionId = session.getSession("spark", payload.getUsername());
+		Long sessionId = session.getSparkSession(payload.getUsername());
 		return analysis.getCompStats(sessionId, payload.getDataset1(), payload.getDataset2(), payload.getColumn());
 	}
 }

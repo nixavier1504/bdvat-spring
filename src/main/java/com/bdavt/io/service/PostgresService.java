@@ -11,7 +11,6 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.bdavt.io.constants.AppConstants;
 import com.bdavt.io.repository.PostgresMethods;
 
 @Service
