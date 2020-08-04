@@ -43,5 +43,20 @@
     "name": "mongo.uri",
     "type": "java.lang.String",
     "description": "A description for 'mongo.uri'"
+  },
+  {
+    "name": "mongo.password",
+    "type": "java.lang.String",
+    "description": "A description for 'mongo.password'"
+  },
+  {
+    "name": "mongo.user",
+    "type": "java.lang.String",
+    "description": "A description for 'mongo.user'"
+  },
+  {
+    "name": "python.filepath",
+    "type": "java.lang.String",
+    "description": "A description for 'python.filepath'"
   }
 ]}
