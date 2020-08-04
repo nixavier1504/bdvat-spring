@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dvenci.postgres.model.Profile;
-import com.dvenci.service.ProfileService;
+import com.dvenci.postgres.service.ProfileService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/profile")
+@RequestMapping(value = "/api/v1/profile", produces = "application/json")
 public class ProfileController {
 	
 	@Autowired

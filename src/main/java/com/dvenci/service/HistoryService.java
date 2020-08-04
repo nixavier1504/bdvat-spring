@@ -8,9 +8,9 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dvenci.model.request.Schema;
-import com.dvenci.mongo.dao.HistoryDao;
+import com.dvenci.http.model.request.Schema;
 import com.dvenci.mongo.model.History;
+import com.dvenci.mongo.repo.HistoryDao;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;

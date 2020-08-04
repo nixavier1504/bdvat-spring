@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.dvenci.livy.service.LivyService;
+import com.dvenci.livy.utils.LivyUtils;
 import com.dvenci.repository.AnalysisMethods;
 import com.dvenci.utils.AnalysisUtils;
-import com.dvenci.utils.LivyUtils;
 
 @Service
 public class AnalysisService implements AnalysisMethods{
@@ -19,7 +19,7 @@ public class AnalysisService implements AnalysisMethods{
 	@Autowired
 	private LivyService livy;
 	
-	@Value("${python.filePath}")
+	@Value("${python.filepath}")
 	private String pythonFile;
 	
 	@Override

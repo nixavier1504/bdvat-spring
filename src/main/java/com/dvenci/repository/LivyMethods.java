@@ -1,10 +1,6 @@
 package com.dvenci.repository;
 
-import java.io.IOException;
-
-import org.apache.http.client.ClientProtocolException;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Repository;
 
 @Repository

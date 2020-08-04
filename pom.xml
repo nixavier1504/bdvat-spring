@@ -9,11 +9,11 @@
 		<version>2.1.8.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.bdavt.io</groupId>
-	<artifactId>BDAVT-Psql-Spring</artifactId>
+	<groupId>com.dvenci</groupId>
+	<artifactId>Dvenci-Spring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>BDAVT-Psql-Spring</name>
-	<description>spring boot integration with Postgresql</description>
+	<name>Dvenci-Spring</name>
+	<description>spring boot integration with Postgresql, mongodb, livy</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

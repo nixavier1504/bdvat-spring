@@ -1,9 +1,0 @@
-{
-              "username":"user1",
-              "dataset":"",
-              "columns":"['col1', 'col2']",
-              "profile":"meteor",
-              "exec_id":"12345",
-              "thresholdPercantage": 40,
-              "validationPercentage": 60
-}

@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dvenci.model.request.ExecutionIdRequest;
-import com.dvenci.mongo.dao.HistoryDao;
+import com.dvenci.http.model.request.ExecutionIdRequest;
+import com.dvenci.mongo.repo.HistoryDao;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(value = "/history", produces = "application/json")
+@RequestMapping(value = "/api/v1/history", produces = "application/json")
 public class HistoryController {
 	
 	@Autowired

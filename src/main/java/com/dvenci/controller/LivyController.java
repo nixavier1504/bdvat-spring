@@ -9,22 +9,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dvenci.model.request.BinStats;
-import com.dvenci.model.request.CompStats;
-import com.dvenci.model.request.Correlation;
-import com.dvenci.model.request.DescriptiveAnalysis;
-import com.dvenci.model.request.FeatureEngineering;
-import com.dvenci.model.request.NullCount;
-import com.dvenci.model.request.PredictTarget;
-import com.dvenci.model.request.PredictiveAnalysis;
-import com.dvenci.model.request.Schema;
-import com.dvenci.mongo.dao.HistoryDao;
+import com.dvenci.http.model.request.BinStats;
+import com.dvenci.http.model.request.CompStats;
+import com.dvenci.http.model.request.Correlation;
+import com.dvenci.http.model.request.DescriptiveAnalysis;
+import com.dvenci.http.model.request.FeatureEngineering;
+import com.dvenci.http.model.request.NullCount;
+import com.dvenci.http.model.request.PredictTarget;
+import com.dvenci.http.model.request.PredictiveAnalysis;
+import com.dvenci.http.model.request.Schema;
+import com.dvenci.mongo.repo.HistoryDao;
 import com.dvenci.service.AnalysisService;
 import com.dvenci.service.SessionService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(value = "/livy", consumes = "application/json", produces = "application/json")
+@RequestMapping(value = "/api/v1/livy", produces = "application/json")
 public class LivyController {
 	
 	@Autowired

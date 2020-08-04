@@ -58,5 +58,10 @@
     "name": "python.filepath",
     "type": "java.lang.String",
     "description": "A description for 'python.filepath'"
+  },
+  {
+    "name": "hibernate.jdbc.lob.non_contextual_creation",
+    "type": "java.lang.Boolean",
+    "description": "A description for 'hibernate.jdbc.lob.non_contextual_creation'"
   }
 ]}
