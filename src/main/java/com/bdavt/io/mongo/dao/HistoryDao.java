@@ -1,5 +1,8 @@
 package com.bdavt.io.mongo.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.bson.types.ObjectId;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,13 +19,18 @@ import com.bdavt.io.model.request.NullCount;
 import com.bdavt.io.model.request.PredictiveAnalysis;
 import com.bdavt.io.model.request.Schema;
 import com.bdavt.io.mongo.model.History;
+import com.bdavt.io.utils.HistoryUtils;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.WriteResult;
 import com.mongodb.util.JSON;
+
+import scala.reflect.internal.Trees.New;
 
 @Service
 public class HistoryDao {
@@ -39,6 +47,66 @@ public class HistoryDao {
 	public WriteResult updateDocument(BasicDBObject query, BasicDBObject updateDoc) {
 		DBCollection collection = mongo.getCollection("history");
 		return collection.update(query, updateDoc);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public JSONArray getTimeStamps(String username) {
+		DBCollection collection = mongo.getCollection("history");
+		JSONArray result = new JSONArray();
+		
+		BasicDBObject query = new BasicDBObject();
+		query.put("username", username);
+		
+		BasicDBObject fields = new BasicDBObject();
+		fields.put("timestamp", true);
+		fields.put("_id", true);
+		
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
+		
+		DBCursor cursor = collection.find(query, fields);
+		while (cursor.hasNext()) {
+			DBObject dbObject = (DBObject) cursor.next();
+			try {
+				JSONObject entry = (JSONObject) new JSONParser().parse(JSON.serialize(dbObject)); 
+				entry.put("_id", dbObject.get("_id").toString());
+				Date timestamp = (Date)dbObject.get("timestamp");
+				entry.put("timestamp", df.format(timestamp));
+				result.add(entry);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public JSONObject getHistoryById(String _id) {
+		DBCollection collection = mongo.getCollection("history");
+		BasicDBObject query = new BasicDBObject();
+		query.put("_id", new ObjectId(_id));
+		DBCursor cursor = collection.find(query);
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
+		while(cursor.hasNext()) {
+			DBObject dbObject = (DBObject) cursor.next();
+			try {
+				JSONObject entry = (JSONObject) new JSONParser().parse(JSON.serialize(dbObject));
+				entry.put("_id", dbObject.get("_id").toString());
+				entry.put("timestamp", df.format(dbObject.get("timestamp")));
+				entry.put("schema", HistoryUtils.strToJson((JSONArray) entry.get("schema")));
+				entry.put("descriptiveStats", HistoryUtils.strToJson((JSONArray) entry.get("descriptiveStats")));
+				entry.put("correlation", HistoryUtils.strToJson((JSONArray) entry.get("correlation")));
+				entry.put("compStats", HistoryUtils.strToJson((JSONArray) entry.get("compStats")));
+				entry.put("featureEngineering", HistoryUtils.strToJson((JSONArray) entry.get("featureEngineering")));
+				entry.put("binStats", HistoryUtils.strToJson((JSONArray) entry.get("binStats")));
+				entry.put("nullCount", HistoryUtils.strToJson((JSONArray) entry.get("nullCount")));
+				entry.put("predictiveStats", HistoryUtils.strToJson((JSONArray) entry.get("predictiveStats")));
+				return entry;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+		return null;
 	}
 	
 	@SuppressWarnings("unchecked")

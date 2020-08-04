@@ -17,10 +17,8 @@ import com.bdavt.io.model.request.NullCount;
 import com.bdavt.io.model.request.PredictiveAnalysis;
 import com.bdavt.io.model.request.Schema;
 import com.bdavt.io.mongo.dao.HistoryDao;
-import com.bdavt.io.mongo.model.History;
 import com.bdavt.io.service.AnalysisService;
 import com.bdavt.io.service.SessionService;
-import com.google.gson.JsonArray;
 
 @RestController
 @CrossOrigin(origins = "*")

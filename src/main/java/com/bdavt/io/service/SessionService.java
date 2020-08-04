@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bdavt.io.exception.httpClient.NotFoundException;
+import com.bdavt.io.exception.livy.SessionNotFoundException;
 import com.bdavt.io.postgres.model.PySparkSession;
 import com.bdavt.io.postgres.model.SparkSession;
 import com.bdavt.io.postgres.repo.PySparkSessionRepo;
@@ -48,7 +48,7 @@ public class SessionService {
 					session.setSessionId(sessionId);
 					sparkSession.save(session);
 				}
-			} catch (NotFoundException e) {
+			} catch (SessionNotFoundException e) {
 				System.out.println("Invalid session from db");
 				sessionId = livy.createSession("spark");
 				System.out.println("New session created");
@@ -81,7 +81,7 @@ public class SessionService {
 					session.setSessionId(sessionId);
 					pySparkSession.save(session);
 				}
-			} catch (NotFoundException e) {
+			} catch (SessionNotFoundException e) {
 				System.out.println("Invalid session from db");
 				sessionId = livy.createSession("pyspark");
 				System.out.println("New session created");

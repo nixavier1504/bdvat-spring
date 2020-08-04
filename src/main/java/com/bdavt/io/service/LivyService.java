@@ -19,7 +19,7 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.bdavt.io.exception.httpClient.NotFoundException;
+import com.bdavt.io.exception.livy.SessionNotFoundException;
 import com.bdavt.io.repository.LivyMethods;
 
 @Service
@@ -54,7 +54,7 @@ public class LivyService implements LivyMethods {
 	}
 
 	@Override
-	public JSONObject fetchSession(Long sessionId) throws ClientProtocolException, IOException, NotFoundException, ParseException {
+	public JSONObject fetchSession(Long sessionId) throws ClientProtocolException, IOException, SessionNotFoundException, ParseException {
 		HttpClient httpclient = HttpClients.createDefault();
 		HttpGet httpGet = new HttpGet(LIVY_BASEPATH + "/sessions/" + sessionId);
 		httpGet.setHeader("Accept", "application/json");
@@ -65,7 +65,7 @@ public class LivyService implements LivyMethods {
 	    
 	    //Session Not found
 	    if(response.getStatusLine().getStatusCode() == HttpStatus.SC_NOT_FOUND) {
-	    	throw new NotFoundException("Session not found");
+	    	throw new SessionNotFoundException("Session not found");
 	    }
 	    if (respEntity != null) {
 	    	JSONParser parser = new JSONParser();
@@ -132,7 +132,7 @@ public class LivyService implements LivyMethods {
 	}
 
 	@Override
-	public String checkSessionStatus(Long sessionId) throws ClientProtocolException, IOException, NotFoundException, ParseException {
+	public String checkSessionStatus(Long sessionId) throws ClientProtocolException, IOException, SessionNotFoundException, ParseException {
 		return (String) fetchSession(sessionId).get("state");
 	}
 	

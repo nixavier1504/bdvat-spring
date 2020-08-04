@@ -1,6 +1,6 @@
 package com.bdavt.io.model.request;
 
-public class UserRequest {
+public class ExecutionIdRequest {
 	private String username;
 
 	public String getUsername() {
