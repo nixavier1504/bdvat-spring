@@ -5,6 +5,7 @@ public class Schema {
 	private String username;
     private String dataset;
     private String profile;
+    private String executionId;
     
 	public String getUsername() {
 		return username;
@@ -23,6 +24,12 @@ public class Schema {
 	}
 	public void setProfile(String profile) {
 		this.profile = profile;
+	}
+	public String getExecutionId() {
+		return executionId;
+	}
+	public void setExecutionId(String executionId) {
+		this.executionId = executionId;
 	}
     
 }

@@ -6,6 +6,7 @@ public class CompStats {
 	private String dataset1;
 	private String dataset2;
     private String column;
+    private String executionId;
     
 	public String getUsername() {
 		return username;
@@ -30,6 +31,12 @@ public class CompStats {
 	}
 	public void setColumn(String column) {
 		this.column = column;
+	}
+	public String getExecutionId() {
+		return executionId;
+	}
+	public void setExecutionId(String executionId) {
+		this.executionId = executionId;
 	}
     
 }

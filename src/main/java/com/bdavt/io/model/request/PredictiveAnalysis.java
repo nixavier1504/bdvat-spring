@@ -6,7 +6,7 @@ public class PredictiveAnalysis {
 	private String dataset;
     private String columns;
     private String profile;
-    private String Exec_id;
+    private String executionId;
 	private int thresholdPercantage;
 	private int validationPercentage;
 	
@@ -34,11 +34,11 @@ public class PredictiveAnalysis {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
-	public String getExec_id() {
-		return Exec_id;
+	public String getExecutionId() {
+		return executionId;
 	}
-	public void setExec_id(String exec_id) {
-		Exec_id = exec_id;
+	public void setExecutionId(String exec_id) {
+		executionId = exec_id;
 	}
 	public int getThresholdPercantage() {
 		return thresholdPercantage;

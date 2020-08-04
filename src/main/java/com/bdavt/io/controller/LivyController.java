@@ -16,10 +16,14 @@ import com.bdavt.io.model.request.DescriptiveAnalysis;
 import com.bdavt.io.model.request.NullCount;
 import com.bdavt.io.model.request.PredictiveAnalysis;
 import com.bdavt.io.model.request.Schema;
+import com.bdavt.io.mongo.dao.HistoryDao;
+import com.bdavt.io.mongo.model.History;
 import com.bdavt.io.service.AnalysisService;
 import com.bdavt.io.service.SessionService;
+import com.google.gson.JsonArray;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/livy", consumes = "application/json", produces = "application/json")
 public class LivyController {
 	
@@ -29,52 +33,62 @@ public class LivyController {
 	@Autowired
 	private AnalysisService analysis;
 	
-	@CrossOrigin(origins = "*")
+	@Autowired
+	private HistoryDao history;
+	
 	@PostMapping("/schema")
 	public JSONArray getSchema(@RequestBody Schema payload) throws Exception {
 		Long sessionId = session.getSparkSession(payload.getUsername());
-		return analysis.getSchema(sessionId, payload.getDataset());
+		JSONArray schema = analysis.getSchema(sessionId, payload.getDataset());
+		history.saveSchema(payload, schema);
+		return schema;
 	}
 	
-	@CrossOrigin(origins = "*")
 	@PostMapping("/stats")
 	public JSONArray getDescriptiveAnalysis(@RequestBody DescriptiveAnalysis payload) throws Exception {
 		Long sessionId = session.getPySparkSession(payload.getUsername());
-		return analysis.getDescriptiveAnalysis(sessionId, payload.getDataset(), payload.getColumns());
+		JSONArray stats = analysis.getDescriptiveAnalysis(sessionId, payload.getDataset(), payload.getColumns());
+		history.saveDescriptiveStats(payload, stats);
+		return stats;
 	}
 	
-	@CrossOrigin(origins = "*")
 	@PostMapping("/correlation")
 	public JSONObject getCorrelation(@RequestBody Correlation payload) throws Exception {
 		Long sessionId = session.getPySparkSession(payload.getUsername());
-		return analysis.getCorrelation(sessionId, payload.getDataset(), payload.getColumns());
+		JSONObject stats = analysis.getCorrelation(sessionId, payload.getDataset(), payload.getColumns());
+		history.saveCorrelation(payload, stats);
+		return stats;
 	}
 	
-	@CrossOrigin(origins = "*")
 	@PostMapping("/predictive")
 	public JSONArray getPrecitiveAnalysis(@RequestBody PredictiveAnalysis payload) throws Exception {
 		Long sessionId = session.getPySparkSession(payload.getUsername());
-		return analysis.getPredictiveAnalysis(sessionId, payload.getDataset(), payload.getColumns(), payload.getThresholdPercantage());
+		JSONArray stats = analysis.getPredictiveAnalysis(sessionId, payload.getDataset(), payload.getColumns(), payload.getThresholdPercantage());
+		history.savePredictiveStats(payload, stats);
+		return stats;
 	}
 	
-	@CrossOrigin(origins = "*")
 	@PostMapping("/nullcount")
 	public JSONObject getNullCount(@RequestBody NullCount payload) throws Exception {
 		Long sessionId = session.getSparkSession(payload.getUsername());
-		return analysis.getNullCount(sessionId, payload.getDataset(), payload.getColumn());
+		JSONObject stats = analysis.getNullCount(sessionId, payload.getDataset(), payload.getColumn());
+		history.saveNullCount(payload, stats);
+		return stats;
 	}
 	
-	@CrossOrigin(origins = "*")
 	@PostMapping("/binstats")
 	public JSONObject getBinStats(@RequestBody BinStats payload) throws Exception {
 		Long sessionId = session.getPySparkSession(payload.getUsername());
-		return analysis.getBinStats(sessionId, payload.getDataset(), payload.getColumns());
+		JSONObject stats = analysis.getBinStats(sessionId, payload.getDataset(), payload.getColumns());
+		history.saveBinStats(payload, stats);
+		return stats;
 	}
 	
-	@CrossOrigin(origins = "*")
 	@PostMapping("/compstats")
 	public JSONArray getCompStats(@RequestBody CompStats payload) throws Exception {
 		Long sessionId = session.getSparkSession(payload.getUsername());
-		return analysis.getCompStats(sessionId, payload.getDataset1(), payload.getDataset2(), payload.getColumn());
+		JSONArray stats = analysis.getCompStats(sessionId, payload.getDataset1(), payload.getDataset2(), payload.getColumn());
+		history.saveCompStats(payload, stats);
+		return stats;
 	}
 }

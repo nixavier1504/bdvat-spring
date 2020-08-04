@@ -14,7 +14,6 @@ public class BdavtPsqlSpringApplication {
 	
 	public static void main(String[] args) throws UnsupportedEncodingException, ClassNotFoundException, InterruptedException, SQLException, ParseException {
 	    SpringApplication application = new SpringApplication(BdavtPsqlSpringApplication.class);
-	   // addInitHooks(application);
 	    application.run(args);
 	}
 

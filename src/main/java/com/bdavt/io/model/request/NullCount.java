@@ -6,6 +6,7 @@ public class NullCount {
     private String dataset;
     private String profile;
 	private String column;
+	private String executionId;
 	
 	public String getUsername() {
 		return username;
@@ -30,5 +31,11 @@ public class NullCount {
 	}
 	public void setColumn(String columns) {
 		this.column = columns;
+	}
+	public String getExecutionId() {
+		return executionId;
+	}
+	public void setExecutionId(String executionId) {
+		this.executionId = executionId;
 	}
 }

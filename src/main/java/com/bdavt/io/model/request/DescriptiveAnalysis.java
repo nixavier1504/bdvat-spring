@@ -6,7 +6,7 @@ public class DescriptiveAnalysis {
 	private String dataset;
     private String columns;
     private String profile;
-    private String Exec_id;
+    private String executionId;
     
 	public String getUsername() {
 		return username;
@@ -32,10 +32,10 @@ public class DescriptiveAnalysis {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
-	public String getExec_id() {
-		return Exec_id;
+	public String getExecutionId() {
+		return executionId;
 	}
-	public void setExec_id(String exec_id) {
-		Exec_id = exec_id;
+	public void setExecutionId(String exec_id) {
+		executionId = exec_id;
 	}
 }
