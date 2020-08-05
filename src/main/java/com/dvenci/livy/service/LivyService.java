@@ -3,9 +3,10 @@ package com.dvenci.livy.service;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.httpclient.HttpStatus;
+//import org.apache.commons.httpclient.HttpStatus;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
