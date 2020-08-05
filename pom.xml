@@ -10,9 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.dvenci</groupId>
-	<artifactId>Dvenci-Spring</artifactId>
+	<artifactId>Dvenci-Spring-Boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Dvenci-Spring</name>
+	<packaging>jar</packaging>
+	<name>Dvenci-Spring-Boot</name>
 	<description>spring boot integration with Postgresql, mongodb, livy</description>
 
 	<properties>
@@ -37,11 +38,11 @@
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>9.1-901-1.jdbc4</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -78,7 +79,7 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.6.1</version>
@@ -89,11 +90,10 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.6.1</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
-			<!-- <version>2.12.3</version> -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

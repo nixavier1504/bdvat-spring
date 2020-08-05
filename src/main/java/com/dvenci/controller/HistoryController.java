@@ -19,7 +19,7 @@ import com.dvenci.mongo.service.MongoService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(value = "/api/v1/history", produces = "application/json")
+@RequestMapping(value = "/api/v1/execution", produces = "application/json")
 public class HistoryController {
 	
 	@Autowired
@@ -38,14 +38,5 @@ public class HistoryController {
 	@GetMapping("/list/{username}")
 	public List<AnalysisHistory> getTimeStamps(@PathVariable("username") String username){
 		return mongo.getTimeStampsByUsername(username);
-	}
-	
-	@PostMapping("/test")
-	@SuppressWarnings("unchecked")
-	public void test(@RequestBody Schema payload) {
-		JSONArray data = new JSONArray();
-		data.add("a");
-		data.add("b");
-		mongo.saveSchema(payload, data);
 	}
 }
