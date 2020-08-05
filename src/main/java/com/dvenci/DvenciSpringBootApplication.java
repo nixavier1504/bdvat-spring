@@ -6,10 +6,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
 @SpringBootApplication
-public class DvenciSpringApplication {
+public class DvenciSpringBootApplication {
 	
 	public static void main(String[] args) {
-	    SpringApplication application = new SpringApplication(DvenciSpringApplication.class);
+	    SpringApplication application = new SpringApplication(DvenciSpringBootApplication.class);
 	    application.run(args);
 	}
 

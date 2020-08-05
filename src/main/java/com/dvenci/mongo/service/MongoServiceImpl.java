@@ -27,7 +27,7 @@ import com.dvenci.mongo.model.CompStatHistory;
 import com.dvenci.mongo.model.CorrelationHistory;
 import com.dvenci.mongo.model.DescStatsHistory;
 import com.dvenci.mongo.model.FeatureEngHistory;
-import com.dvenci.mongo.model.MHistory;
+import com.dvenci.mongo.model.AnalysisHistory;
 import com.dvenci.mongo.model.NullCountHistory;
 import com.dvenci.mongo.model.PredictiveStatsHistory;
 import com.dvenci.mongo.model.SchemaHistory;
@@ -80,21 +80,21 @@ public class MongoServiceImpl implements MongoService {
 	private CompStatHistoryRepo compStatsRepo;
 	
 	@Override
-	public List<MHistory> getTimeStampsByUsername(String username) {
+	public List<AnalysisHistory> getTimeStampsByUsername(String username) {
 		return mongo.getTimeStampsByUsername(username);
 	}
 
 	@Override
-	public MHistory createEntry(String username) {
-		MHistory entry = new MHistory();
+	public AnalysisHistory createEntry(String username) {
+		AnalysisHistory entry = new AnalysisHistory();
 		entry.setTimestamp(new Date());
 		entry.setUsername(username);
 		return mongo.save(entry);
 	}
 
 	@Override
-	public MHistory getEntry(String id) {
-		Optional<MHistory> E = mongo.findById(id);
+	public AnalysisHistory getEntry(String id) {
+		Optional<AnalysisHistory> E = mongo.findById(id);
 		if(E.isPresent()) {
 			return E.get();
 		}
@@ -113,7 +113,7 @@ public class MongoServiceImpl implements MongoService {
 		Update update = new Update();
 		update.addToSet("schema", entry);
 		Criteria criteria = Criteria.where("id").is(payload.getExecutionId());
-		template.updateFirst(Query.query(criteria), update, MHistory.class);
+		template.updateFirst(Query.query(criteria), update, AnalysisHistory.class);
 	}
 
 	@Override
@@ -129,7 +129,7 @@ public class MongoServiceImpl implements MongoService {
 		Update update = new Update();
 		update.addToSet("descriptiveStats", entry);
 		Criteria criteria = Criteria.where("id").is(payload.getExecutionId());
-		template.updateFirst(Query.query(criteria), update, MHistory.class);
+		template.updateFirst(Query.query(criteria), update, AnalysisHistory.class);
 		
 	}
 
@@ -146,7 +146,7 @@ public class MongoServiceImpl implements MongoService {
 		Update update = new Update();
 		update.addToSet("correlation", entry);
 		Criteria criteria = Criteria.where("id").is(payload.getExecutionId());
-		template.updateFirst(Query.query(criteria), update, MHistory.class);
+		template.updateFirst(Query.query(criteria), update, AnalysisHistory.class);
 		
 	}
 
@@ -165,7 +165,7 @@ public class MongoServiceImpl implements MongoService {
 		Update update = new Update();
 		update.addToSet("predictiveStats", entry);
 		Criteria criteria = Criteria.where("id").is(payload.getExecutionId());
-		template.updateFirst(Query.query(criteria), update, MHistory.class);
+		template.updateFirst(Query.query(criteria), update, AnalysisHistory.class);
 	}
 
 	@Override
@@ -184,7 +184,7 @@ public class MongoServiceImpl implements MongoService {
 		Update update = new Update();
 		update.addToSet("featureEngineering", entry);
 		Criteria criteria = Criteria.where("id").is(payload.getExecutionId());
-		template.updateFirst(Query.query(criteria), update, MHistory.class);
+		template.updateFirst(Query.query(criteria), update, AnalysisHistory.class);
 	}
 
 	@Override
@@ -203,7 +203,7 @@ public class MongoServiceImpl implements MongoService {
 		Update update = new Update();
 		update.addToSet("targetPrediction", entry);
 		Criteria criteria = Criteria.where("id").is(payload.getExecutionId());
-		template.updateFirst(Query.query(criteria), update, MHistory.class);
+		template.updateFirst(Query.query(criteria), update, AnalysisHistory.class);
 	}
 
 	@Override
@@ -219,7 +219,7 @@ public class MongoServiceImpl implements MongoService {
 		Update update = new Update();
 		update.addToSet("binStats", entry);
 		Criteria criteria = Criteria.where("id").is(payload.getExecutionId());
-		template.updateFirst(Query.query(criteria), update, MHistory.class);
+		template.updateFirst(Query.query(criteria), update, AnalysisHistory.class);
 	}
 
 	@Override
@@ -235,7 +235,7 @@ public class MongoServiceImpl implements MongoService {
 		Update update = new Update();
 		update.addToSet("nullCount", entry);
 		Criteria criteria = Criteria.where("id").is(payload.getExecutionId());
-		template.updateFirst(Query.query(criteria), update, MHistory.class);	
+		template.updateFirst(Query.query(criteria), update, AnalysisHistory.class);	
 	}
 
 	@Override
@@ -251,7 +251,7 @@ public class MongoServiceImpl implements MongoService {
 		Update update = new Update();
 		update.addToSet("compStats", entry);
 		Criteria criteria = Criteria.where("id").is(payload.getExecutionId());
-		template.updateFirst(Query.query(criteria), update, MHistory.class);
+		template.updateFirst(Query.query(criteria), update, AnalysisHistory.class);
 	}
 	
 }

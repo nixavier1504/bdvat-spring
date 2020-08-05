@@ -14,13 +14,13 @@ import com.dvenci.http.model.request.NullCount;
 import com.dvenci.http.model.request.PredictTarget;
 import com.dvenci.http.model.request.PredictiveAnalysis;
 import com.dvenci.http.model.request.Schema;
-import com.dvenci.mongo.model.MHistory;
+import com.dvenci.mongo.model.AnalysisHistory;
 
 public interface MongoService {
 	
-	public MHistory createEntry(String username);
-	public List<MHistory> getTimeStampsByUsername(String username);
-	public MHistory getEntry(String id);
+	public AnalysisHistory createEntry(String username);
+	public List<AnalysisHistory> getTimeStampsByUsername(String username);
+	public AnalysisHistory getEntry(String id);
 	
 	public void saveSchema(Schema payload, JSONArray data);
 	public void saveDescStats(DescriptiveAnalysis payload, JSONArray data);

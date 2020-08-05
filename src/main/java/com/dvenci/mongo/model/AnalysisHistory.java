@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class MHistory {
+public class AnalysisHistory {
 	
 	@Id
 	private String id;

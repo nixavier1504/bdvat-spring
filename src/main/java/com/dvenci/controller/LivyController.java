@@ -18,7 +18,6 @@ import com.dvenci.http.model.request.NullCount;
 import com.dvenci.http.model.request.PredictTarget;
 import com.dvenci.http.model.request.PredictiveAnalysis;
 import com.dvenci.http.model.request.Schema;
-import com.dvenci.mongo.repo.HistoryDao;
 import com.dvenci.mongo.service.MongoService;
 import com.dvenci.service.AnalysisService;
 import com.dvenci.service.SessionService;

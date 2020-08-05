@@ -6,15 +6,15 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.dvenci.mongo.model.MHistory;
+import com.dvenci.mongo.model.AnalysisHistory;
 
 @Repository
-public interface HistoryRepo extends MongoRepository<MHistory, String> {
+public interface HistoryRepo extends MongoRepository<AnalysisHistory, String> {
 	
 	@Query(value = "{'username': ?0}")
-	List<MHistory> getHistoryByUser(String username);
+	List<AnalysisHistory> getHistoryByUser(String username);
 	
 	@Query(value = "{'username': ?0}", fields = "{'timestamp':1}")
-	List<MHistory> getTimeStampsByUsername(String username);
+	List<AnalysisHistory> getTimeStampsByUsername(String username);
 	
 }

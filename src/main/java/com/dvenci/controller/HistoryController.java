@@ -3,7 +3,6 @@ package com.dvenci.controller;
 import java.util.List;
 
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dvenci.http.model.request.ExecutionIdRequest;
 import com.dvenci.http.model.request.Schema;
-import com.dvenci.mongo.model.MHistory;
+import com.dvenci.mongo.model.AnalysisHistory;
 import com.dvenci.mongo.service.MongoService;
 
 @RestController
@@ -27,21 +26,22 @@ public class HistoryController {
 	private MongoService mongo;
 	
 	@PostMapping("/id")
-	public MHistory getExecutionId(@RequestBody ExecutionIdRequest payload) {
+	public AnalysisHistory getExecutionId(@RequestBody ExecutionIdRequest payload) {
 		return mongo.createEntry(payload.getUsername());
 	}
 	
 	@GetMapping("/{id}")
-	public MHistory getHistoryById(@PathVariable("id") String id) {
+	public AnalysisHistory getHistoryById(@PathVariable("id") String id) {
 		return mongo.getEntry(id);
 	}
 	
 	@GetMapping("/list/{username}")
-	public List<MHistory> getTimeStamps(@PathVariable("username") String username){
+	public List<AnalysisHistory> getTimeStamps(@PathVariable("username") String username){
 		return mongo.getTimeStampsByUsername(username);
 	}
 	
 	@PostMapping("/test")
+	@SuppressWarnings("unchecked")
 	public void test(@RequestBody Schema payload) {
 		JSONArray data = new JSONArray();
 		data.add("a");
