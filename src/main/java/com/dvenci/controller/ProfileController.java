@@ -15,7 +15,7 @@ import com.dvenci.postgres.model.Profile;
 import com.dvenci.postgres.service.ProfileService;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin
 @RequestMapping(value = "/api/v1/profile", produces = "application/json")
 public class ProfileController {
 	
