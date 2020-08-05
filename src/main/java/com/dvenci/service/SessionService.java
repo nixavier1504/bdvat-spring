@@ -15,10 +15,6 @@ import com.dvenci.postgres.repo.SparkSessionRepo;
 @Service
 public class SessionService {
 
-	public SessionService() {
-
-	}
-	
 	@Autowired
 	private LivyService livy;
 	

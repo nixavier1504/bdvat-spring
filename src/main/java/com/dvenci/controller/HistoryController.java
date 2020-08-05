@@ -2,7 +2,6 @@ package com.dvenci.controller;
 
 import java.util.List;
 
-import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dvenci.http.model.request.ExecutionIdRequest;
-import com.dvenci.http.model.request.Schema;
 import com.dvenci.mongo.model.AnalysisHistory;
 import com.dvenci.mongo.service.MongoService;
 

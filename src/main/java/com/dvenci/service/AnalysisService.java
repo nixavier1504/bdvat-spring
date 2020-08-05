@@ -92,7 +92,8 @@ public class AnalysisService implements AnalysisMethods{
 				+ "val schemaFile_temp = sqlContext.read.parquet(path.toString);"
 				+ "val schemaFile = schemaFile_temp.filter(schemaFile_temp(col).isNull || schemaFile_temp(col) === \"\").count;" 
 				+ "return schemaFile.toString() };"
-				+ "val schema = schemaParquet(\"" + dir + "\",\"" + col + "\") \n%json schema";
+				+ "val schema = schemaParquet(\"" + dir + "\",\"" + col + "\");\n"
+				+ "%json schema";
 		Long statementId = livy.createStatement(sessionId, scalaCode);
 		JSONObject response = livy.getStatementResponse(sessionId, statementId);
 		Long nullCount = (Long) LivyUtils.getResultFromResponse(response);

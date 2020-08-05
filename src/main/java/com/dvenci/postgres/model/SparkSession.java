@@ -6,6 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class SparkSession {
 	
@@ -18,39 +25,10 @@ public class SparkSession {
 	
 	@Column(nullable = false)
 	private Long sessionId;
-
-	public SparkSession() {
-	}
-
+	
 	public SparkSession(String username, Long sessionId) {
 		this.username = username;
 		this.sessionId = sessionId;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public Long getSessionId() {
-		return sessionId;
-	}
-
-	public void setSessionId(Long sessionId) {
-		this.sessionId = sessionId;
-	}
-	
-	
 	
 }
