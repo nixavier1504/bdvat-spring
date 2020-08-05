@@ -1,5 +1,7 @@
 package com.dvenci.controller;
 
+import java.util.List;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dvenci.http.model.request.ExecutionIdRequest;
-import com.dvenci.mongo.repo.HistoryDao;
+import com.dvenci.http.model.request.Schema;
+import com.dvenci.mongo.model.MHistory;
+import com.dvenci.mongo.service.MongoService;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -20,20 +24,28 @@ import com.dvenci.mongo.repo.HistoryDao;
 public class HistoryController {
 	
 	@Autowired
-	private HistoryDao dao;
+	private MongoService mongo;
 	
 	@PostMapping("/id")
-	public JSONObject getExecutionId(@RequestBody ExecutionIdRequest payload) throws Exception {
-		return dao.createDocument(payload.getUsername());
+	public MHistory getExecutionId(@RequestBody ExecutionIdRequest payload) {
+		return mongo.createEntry(payload.getUsername());
 	}
 	
-	@GetMapping("")
-	public JSONArray getHistoryList() {
-		return dao.getTimeStamps("user1");
+	@GetMapping("/{id}")
+	public MHistory getHistoryById(@PathVariable("id") String id) {
+		return mongo.getEntry(id);
 	}
 	
-	@GetMapping("/{_id}")
-	public JSONObject getHistoryById(@PathVariable("_id") String _id) {
-		return dao.getHistoryById(_id);
+	@GetMapping("/list/{username}")
+	public List<MHistory> getTimeStamps(@PathVariable("username") String username){
+		return mongo.getTimeStampsByUsername(username);
+	}
+	
+	@PostMapping("/test")
+	public void test(@RequestBody Schema payload) {
+		JSONArray data = new JSONArray();
+		data.add("a");
+		data.add("b");
+		mongo.saveSchema(payload, data);
 	}
 }

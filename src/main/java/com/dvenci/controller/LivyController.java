@@ -19,6 +19,7 @@ import com.dvenci.http.model.request.PredictTarget;
 import com.dvenci.http.model.request.PredictiveAnalysis;
 import com.dvenci.http.model.request.Schema;
 import com.dvenci.mongo.repo.HistoryDao;
+import com.dvenci.mongo.service.MongoService;
 import com.dvenci.service.AnalysisService;
 import com.dvenci.service.SessionService;
 
@@ -34,13 +35,13 @@ public class LivyController {
 	private AnalysisService analysis;
 	
 	@Autowired
-	private HistoryDao history;
+	private MongoService mongo;
 	
 	@PostMapping("/schema")
 	public JSONArray getSchema(@RequestBody Schema payload) throws Exception {
 		Long sessionId = session.getSparkSession(payload.getUsername());
 		JSONArray schema = analysis.getSchema(sessionId, payload.getDataset());
-		history.saveSchema(payload, schema);
+		mongo.saveSchema(payload, schema);
 		return schema;
 	}
 	
@@ -48,7 +49,7 @@ public class LivyController {
 	public JSONArray getDescriptiveAnalysis(@RequestBody DescriptiveAnalysis payload) throws Exception {
 		Long sessionId = session.getPySparkSession(payload.getUsername());
 		JSONArray stats = analysis.getDescriptiveAnalysis(sessionId, payload.getDataset(), payload.getColumns());
-		history.saveDescriptiveStats(payload, stats);
+		mongo.saveDescStats(payload, stats);
 		return stats;
 	}
 	
@@ -56,7 +57,7 @@ public class LivyController {
 	public JSONObject getCorrelation(@RequestBody Correlation payload) throws Exception {
 		Long sessionId = session.getPySparkSession(payload.getUsername());
 		JSONObject stats = analysis.getCorrelation(sessionId, payload.getDataset(), payload.getColumns());
-		history.saveCorrelation(payload, stats);
+		mongo.saveCorrelation(payload, stats);
 		return stats;
 	}
 	
@@ -64,7 +65,7 @@ public class LivyController {
 	public JSONArray getPrecitiveAnalysis(@RequestBody PredictiveAnalysis payload) throws Exception {
 		Long sessionId = session.getPySparkSession(payload.getUsername());
 		JSONArray stats = analysis.getPredictiveAnalysis(sessionId, payload.getDataset(), payload.getColumns(), payload.getThresholdPercentage());
-		history.savePredictiveStats(payload, stats);
+		mongo.savePredictiveStats(payload, stats);
 		return stats;
 	}
 	
@@ -72,7 +73,7 @@ public class LivyController {
 	public JSONObject getNullCount(@RequestBody NullCount payload) throws Exception {
 		Long sessionId = session.getSparkSession(payload.getUsername());
 		JSONObject stats = analysis.getNullCount(sessionId, payload.getDataset(), payload.getColumn());
-		history.saveNullCount(payload, stats);
+		mongo.saveNullCount(payload, stats);
 		return stats;
 	}
 	
@@ -80,7 +81,7 @@ public class LivyController {
 	public JSONObject getBinStats(@RequestBody BinStats payload) throws Exception {
 		Long sessionId = session.getPySparkSession(payload.getUsername());
 		JSONObject stats = analysis.getBinStats(sessionId, payload.getDataset(), payload.getColumns());
-		history.saveBinStats(payload, stats);
+		mongo.saveBinStats(payload, stats);
 		return stats;
 	}
 	
@@ -88,7 +89,7 @@ public class LivyController {
 	public JSONArray getCompStats(@RequestBody CompStats payload) throws Exception {
 		Long sessionId = session.getSparkSession(payload.getUsername());
 		JSONArray stats = analysis.getCompStats(sessionId, payload.getDataset1(), payload.getDataset2(), payload.getColumn());
-		history.saveCompStats(payload, stats);
+		mongo.saveCompStats(payload, stats);
 		return stats;
 	}
 	
@@ -96,13 +97,15 @@ public class LivyController {
 	public JSONObject getFeatureEngineering(@RequestBody FeatureEngineering payload) throws Exception {
 		Long sessionId = session.getPySparkSession(payload.getUsername());
 		JSONObject stats = analysis.getFeatureEngineering(sessionId, payload.getDataset(), payload.getColumns(), payload.getTargetColumn(), payload.getThresholdPercentage());
+		mongo.saveFeatureEngineering(payload, stats);
 		return stats;
 	}
 	
 	@PostMapping("/predictTarget")
-	public JSONArray getTargetPrediction(@RequestBody PredictTarget payload) throws Exception {
+	public JSONObject getTargetPrediction(@RequestBody PredictTarget payload) throws Exception {
 		Long sessionId = session.getPySparkSession(payload.getUsername());
-		JSONArray stats = analysis.getTargetPrediction(sessionId, payload.getDataset(), payload.getColumns(), payload.getTargetColumn(), payload.getThresholdPercentage());
+		JSONObject stats = analysis.getTargetPrediction(sessionId, payload.getDataset(), payload.getColumns(), payload.getTargetColumn(), payload.getThresholdPercentage());
+		mongo.saveTargetPrediction(payload, stats);
 		return stats;
 	}
 }

@@ -154,7 +154,7 @@ public class AnalysisService implements AnalysisMethods{
 		return result;
 	}
 	
-	public JSONArray getTargetPrediction(Long sessionId, String dataset, String cols, String targetCol, int trainingPercent) throws IOException, ParseException, InterruptedException {
+	public JSONObject getTargetPrediction(Long sessionId, String dataset, String cols, String targetCol, int trainingPercent) throws IOException, ParseException, InterruptedException {
 		String dir = dataset + "*";
 		String scalaCode = "sc.addFile(\"" + pythonFile + "\");\n"
 				+ "import bavt_stats as bt;\n"
@@ -162,9 +162,9 @@ public class AnalysisService implements AnalysisMethods{
 				+ "%json x";
 		Long statementId = livy.createStatement(sessionId, scalaCode);
 		JSONObject response = livy.getStatementResponse(sessionId, statementId);
-		JSONArray json = (JSONArray) LivyUtils.getResultFromResponse(response);
+//		JSONArray json = (JSONArray) LivyUtils.getResultFromResponse(response);
 //		JSONObject result = AnalysisUtils.processFeatureEngineering(json);
-		return json;
+		return response;
 	}
 
 
