@@ -20,7 +20,9 @@ import com.dvenci.http.model.request.PredictiveAnalysis;
 import com.dvenci.http.model.request.Schema;
 import com.dvenci.mongo.service.MongoService;
 import com.dvenci.service.AnalysisService;
+import com.dvenci.service.AnalysisServiceImpl;
 import com.dvenci.service.SessionService;
+import com.dvenci.service.SessionServiceImpl;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -101,9 +103,9 @@ public class LivyController {
 	}
 	
 	@PostMapping("/predictTarget")
-	public JSONObject getTargetPrediction(@RequestBody PredictTarget payload) throws Exception {
+	public JSONArray getTargetPrediction(@RequestBody PredictTarget payload) throws Exception {
 		Long sessionId = session.getPySparkSession(payload.getUsername());
-		JSONObject stats = analysis.getTargetPrediction(sessionId, payload.getDataset(), payload.getColumns(), payload.getTargetColumn(), payload.getThresholdPercentage());
+		JSONArray stats = analysis.getTargetPrediction(sessionId, payload.getDataset(), payload.getColumns(), payload.getTargetColumn(), payload.getThresholdPercentage());
 		mongo.saveTargetPrediction(payload, stats);
 		return stats;
 	}

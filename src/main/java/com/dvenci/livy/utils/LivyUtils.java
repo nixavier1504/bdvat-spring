@@ -1,5 +1,6 @@
 package com.dvenci.livy.utils;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -15,49 +16,18 @@ public class LivyUtils {
 		JSONObject json = new JSONObject();
 		if(output != null) {
 			if("ok".equalsIgnoreCase((String) output.get("status"))) {
-				String jsonStr = (String) ((JSONObject) output.get("data")).get("application/json");
+				Object genericResponse = ((JSONObject) output.get("data")).get("application/json");
+				if(genericResponse.getClass() == JSONArray.class) {
+					genericResponse = ((JSONArray) genericResponse).toJSONString();
+				}
+				if(genericResponse.getClass() == JSONObject.class) {
+					genericResponse = ((JSONObject) genericResponse).toJSONString();
+				}
+				String jsonStr = (String) genericResponse;
 				return new JSONParser().parse(jsonStr);
 			}
 		}
 		return json;
 	}
-	
-//	public static JSONObject livyGet(String path) throws ClientProtocolException, IOException, ParseException {
-//		HttpClient httpClient = HttpClients.createDefault();
-//		HttpGet httpGet = new HttpGet(LIVY_BASEPATH + path);
-//		httpGet.setHeader("Accept", "application/json");
-//		httpGet.setHeader("Content-type", "application/json");
-//		httpGet.setHeader("X-Requested-By", "dvenci");
-//		  
-//	    HttpResponse response = httpClient.execute(httpGet);
-//	    HttpEntity respEntity = response.getEntity();
-//
-//	    if (respEntity != null) {
-//	        String responseStr =  EntityUtils.toString(respEntity);
-//	        if(response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-//	        	return (JSONObject) new JSONParser().parse(responseStr);
-//	        }
-//	    }
-//		return null;
-//	}
-//	
-//	public static JSONObject livyPost(String path, JSONObject payload) throws ClientProtocolException, IOException, ParseException {
-//		HttpClient httpClient = HttpClients.createDefault();
-//		HttpPost httpPost = new HttpPost(LIVY_BASEPATH + path);
-//		StringEntity entity1 = new StringEntity(payload.toJSONString());
-//		httpPost.setEntity(entity1);
-//		httpPost.setHeader("Accept", "application/json");
-//		httpPost.setHeader("Content-type", "application/json");
-//		httpPost.setHeader("X-Requested-By", "dvenci");
-//		
-//		HttpResponse response = httpClient.execute(httpPost);
-//		HttpEntity respEntity = response.getEntity();
-//		if (respEntity != null) {
-//			String responseStr =  EntityUtils.toString(respEntity);
-//			return (JSONObject) new JSONParser().parse(responseStr);
-//			
-//		}
-//		return null;
-//	}
 	
 }

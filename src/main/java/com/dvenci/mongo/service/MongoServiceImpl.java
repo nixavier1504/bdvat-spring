@@ -188,7 +188,7 @@ public class MongoServiceImpl implements MongoService {
 	}
 
 	@Override
-	public void saveTargetPrediction(PredictTarget payload, JSONObject data) {
+	public void saveTargetPrediction(PredictTarget payload, JSONArray data) {
 		TargetPredictHistory entry = new TargetPredictHistory();
 		entry.setData(data);
 		entry.setDataset(payload.getDataset());

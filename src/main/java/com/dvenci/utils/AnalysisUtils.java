@@ -129,4 +129,17 @@ public class AnalysisUtils {
 		result.put("featureImportance", featureImpArr);
 		return result;
 	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public static JSONArray processTargetPrediction(JSONArray data, String targetVar) {
+		JSONArray result = new JSONArray();
+		for(Object obj : data) {
+			JSONObject predictObj = (JSONObject) obj;
+			predictObj.put("Predicted " + targetVar, predictObj.get("prediction"));
+			predictObj.remove("prediction");
+			result.add(predictObj);
+		}
+		return result;
+	}
 }

@@ -27,7 +27,7 @@ public interface MongoService {
 	public void saveCorrelation(Correlation payload, JSONObject data);
 	public void savePredictiveStats(PredictiveAnalysis payload, JSONArray data);
 	public void saveFeatureEngineering(FeatureEngineering payload, JSONObject data);
-	public void saveTargetPrediction(PredictTarget payload, JSONObject data);
+	public void saveTargetPrediction(PredictTarget payload, JSONArray data);
 	public void saveBinStats(BinStats payload, JSONObject data);
 	public void saveNullCount(NullCount payload, JSONObject data);
 	public void saveCompStats(CompStats payload, JSONArray data);
