@@ -12,6 +12,9 @@ import com.dvenci.postgres.model.SparkSession;
 import com.dvenci.postgres.repo.PySparkSessionRepo;
 import com.dvenci.postgres.repo.SparkSessionRepo;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class SessionServiceImpl implements SessionService {
 
@@ -26,30 +29,27 @@ public class SessionServiceImpl implements SessionService {
 	
 	@Override
 	public Long getSparkSession(String username) throws Exception {
-		System.out.println("Fetching spark session from db");
 		SparkSession session = sparkSession.getSessionByUserName(username);
 		Long sessionId = null;
 		if(session == null) {
-			System.out.println("No session found in db");
 			sessionId = livy.createSession("spark");
 			sparkSession.save(new SparkSession(username, sessionId));
-			System.out.println("New session created");
+			log.trace("New spark session created: " + sessionId);
 		} else {
 			sessionId = session.getSessionId();
 			try {
-				System.out.println("Validating session");
 				String status = livy.checkSessionStatus(sessionId);
 				if(status.equalsIgnoreCase("dead")) {
-					System.out.println("Session dead");
 					sessionId = livy.createSession("spark");
-					System.out.println("New session created");
+					log.trace("New spark session created: " + sessionId);
 					session.setSessionId(sessionId);
 					sparkSession.save(session);
+				} else {
+					log.trace("Using existing spark session: " + sessionId);
 				}
 			} catch (SessionNotFoundException e) {
-				System.out.println("Invalid session from db");
 				sessionId = livy.createSession("spark");
-				System.out.println("New session created");
+				log.trace("New spark session created: " + sessionId);
 				session.setSessionId(sessionId);
 				sparkSession.save(session);
 			}
@@ -60,30 +60,26 @@ public class SessionServiceImpl implements SessionService {
 	
 	@Override
 	public Long getPySparkSession(String username) throws Exception {
-		System.out.println("Fetching spark session from db");
 		PySparkSession session = pySparkSession.getSessionByUserName(username);
 		Long sessionId = null;
 		if(session == null) {
-			System.out.println("No session found in db");
 			sessionId = livy.createSession("pyspark");
+			log.trace("New pyspark session created: " + sessionId);
 			pySparkSession.save(new PySparkSession(username, sessionId));
-			System.out.println("New session created");
 		} else {
 			sessionId = session.getSessionId();
 			try {
-				System.out.println("Validating session");
 				String status = livy.checkSessionStatus(sessionId);
 				if(status.equalsIgnoreCase("dead")) {
-					System.out.println("Session dead");
 					sessionId = livy.createSession("pyspark");
-					System.out.println("New session created");
+					log.trace("New pyspark session created: " + sessionId);
 					session.setSessionId(sessionId);
 					pySparkSession.save(session);
+				} else {
+					log.trace("Using existing pyspark session: " + sessionId);
 				}
 			} catch (SessionNotFoundException e) {
-				System.out.println("Invalid session from db");
 				sessionId = livy.createSession("pyspark");
-				System.out.println("New session created");
 				session.setSessionId(sessionId);
 				pySparkSession.save(session);
 			}
@@ -94,12 +90,11 @@ public class SessionServiceImpl implements SessionService {
 
 	private void waitForStart(Long sessionId) throws Exception {
 		String status = livy.checkSessionStatus(sessionId);
-		System.out.println(status);
 		while (!status.equalsIgnoreCase("idle")) {
-			System.out.println("Waiting for session to start");
 			TimeUnit.SECONDS.sleep(3);
 			status = livy.checkSessionStatus(sessionId);
 		}
+		log.trace("Session Idle: " + sessionId);
 	}
 
 }

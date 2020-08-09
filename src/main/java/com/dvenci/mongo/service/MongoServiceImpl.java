@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.dvenci.http.model.request.BinStats;
@@ -102,6 +103,7 @@ public class MongoServiceImpl implements MongoService {
 	}
 
 	@Override
+	@Async
 	public void saveSchema(Schema payload, JSONArray data) {
 		SchemaHistory entry = new SchemaHistory();
 		entry.setData(data);
@@ -117,6 +119,7 @@ public class MongoServiceImpl implements MongoService {
 	}
 
 	@Override
+	@Async
 	public void saveDescStats(DescriptiveAnalysis payload, JSONArray data) {
 		DescStatsHistory entry = new DescStatsHistory();
 		entry.setData(data);
@@ -134,6 +137,7 @@ public class MongoServiceImpl implements MongoService {
 	}
 
 	@Override
+	@Async
 	public void saveCorrelation(Correlation payload, JSONObject data) {
 		CorrelationHistory entry = new CorrelationHistory();
 		entry.setData(data);
@@ -151,6 +155,7 @@ public class MongoServiceImpl implements MongoService {
 	}
 
 	@Override
+	@Async
 	public void savePredictiveStats(PredictiveAnalysis payload, JSONArray data) {
 		PredictiveStatsHistory entry = new PredictiveStatsHistory();
 		entry.setData(data);
@@ -169,6 +174,7 @@ public class MongoServiceImpl implements MongoService {
 	}
 
 	@Override
+	@Async
 	public void saveFeatureEngineering(FeatureEngineering payload, JSONObject data) {
 		FeatureEngHistory entry = new FeatureEngHistory();
 		entry.setData(data);
@@ -188,6 +194,7 @@ public class MongoServiceImpl implements MongoService {
 	}
 
 	@Override
+	@Async
 	public void saveTargetPrediction(PredictTarget payload, JSONArray data) {
 		TargetPredictHistory entry = new TargetPredictHistory();
 		entry.setData(data);
@@ -207,6 +214,7 @@ public class MongoServiceImpl implements MongoService {
 	}
 
 	@Override
+	@Async
 	public void saveBinStats(BinStats payload, JSONObject data) {
 		BinStatsHistory entry = new BinStatsHistory();
 		entry.setData(data);
@@ -223,6 +231,7 @@ public class MongoServiceImpl implements MongoService {
 	}
 
 	@Override
+	@Async
 	public void saveNullCount(NullCount payload, JSONObject data) {
 		NullCountHistory entry = new NullCountHistory();
 		entry.setData(data);
@@ -239,6 +248,7 @@ public class MongoServiceImpl implements MongoService {
 	}
 
 	@Override
+	@Async
 	public void saveCompStats(CompStats payload, JSONArray data) {
 		CompStatHistory entry = new CompStatHistory();
 		entry.setData(data);

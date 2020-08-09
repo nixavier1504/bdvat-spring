@@ -3,7 +3,6 @@ package com.dvenci.livy.service;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-//import org.apache.commons.httpclient.HttpStatus;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -22,6 +21,9 @@ import org.springframework.stereotype.Service;
 
 import com.dvenci.livy.exception.SessionNotFoundException;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class LivyServiceImpl implements LivyService {
 	
@@ -95,7 +97,9 @@ public class LivyServiceImpl implements LivyService {
 		if (respEntity != null) {
 			String responseStr =  EntityUtils.toString(respEntity);
 			if(response.getStatusLine().getStatusCode() == HttpStatus.SC_CREATED) {
-				return (Long)((JSONObject) new JSONParser().parse(responseStr)).get("id");
+				Long statementId = (Long)((JSONObject) new JSONParser().parse(responseStr)).get("id");
+				log.trace("Created statement with Id: " + statementId);
+				return statementId;
 			}
 		}
 		return null;
@@ -140,14 +144,13 @@ public class LivyServiceImpl implements LivyService {
 	@Override
 	public JSONObject getStatementResponse(Long sessionId, Long statementId) throws InterruptedException, ClientProtocolException, IOException, ParseException {
 		String status = "";
+		log.trace("Executing statement");
 		while(!status.equalsIgnoreCase("available")) {
-			System.out.println("Waiting for job to execute");
 			TimeUnit.SECONDS.sleep(1);
 			status = checkStatementStatus(sessionId, statementId);
 		}
 		JSONObject response = fetchStatement(sessionId, statementId);
-		System.out.println("Job completed");
-		
+		log.trace("Statement executed");
 		return response;
 	}
 	
