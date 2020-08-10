@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dvenci.postgres.model.Profile;
 import com.dvenci.postgres.service.ProfileService;
+import com.dvenci.utils.ProfileUtils;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/api/v1/profile", produces = "application/json")
 public class ProfileController {
 	
@@ -24,7 +25,8 @@ public class ProfileController {
 	
 	@GetMapping("/{username}")
 	public List<Profile> getProfiles(@PathVariable("username") String username) {
-		return profile.getProfiles(username);
+		List<Profile> profiles = profile.getProfiles(username);
+		return ProfileUtils.processProfiles(profiles);
 	}
 	
 	@PostMapping("")

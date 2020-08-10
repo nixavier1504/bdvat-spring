@@ -111,8 +111,8 @@ public class AnalysisServiceImpl implements AnalysisService {
 		Long statementId = livy.createStatement(sessionId, scalaCode);
 		JSONObject response = livy.getStatementResponse(sessionId, statementId);
 		JSONObject json = (JSONObject) LivyUtils.getResultFromResponse(response);
-		JSONObject statsObj = AnalysisUtils.processBinStats(json);
-		return statsObj;
+//		JSONObject statsObj = AnalysisUtils.processBinStats(json);
+		return json;
 	}
 
 	@Override
@@ -164,6 +164,31 @@ public class AnalysisServiceImpl implements AnalysisService {
 		JSONObject response = livy.getStatementResponse(sessionId, statementId);
 		JSONArray json = (JSONArray) LivyUtils.getResultFromResponse(response);
 		return json;
+	}
+
+	@Override
+	public JSONObject getDistinctCount(Long sessionId, String dirPath, String col) throws IOException, ParseException, InterruptedException {
+		String dir = dirPath + "*";
+		String scalaCode= "import org.apache.spark.sql.SQLContext;"
+				+ "import scala.util.parsing.json.JSONObject;"
+				+ "def schemaParquet(path: String,col: String): String={"
+				+ "val sqlContext = new SQLContext(sc);"
+				+ "val schemaFile_temp = sqlContext.read.parquet(path.toString);"
+				+ "val schemaFile = schemaFile_temp.select(col).distinct.count;"
+				+ "return schemaFile.toString() };"
+				+ "val schema = schemaParquet(\"" + dir + "\",\"" + col + "\");\n"
+				+ "%json schema";
+		Long statementId = livy.createStatement(sessionId, scalaCode);
+		JSONObject response = livy.getStatementResponse(sessionId, statementId);
+		Long distinctCount = (Long) LivyUtils.getResultFromResponse(response);
+		return AnalysisUtils.processDistinctCount(col, distinctCount);
+	}
+
+	@Override
+	public JSONObject getNullnDistinct(Long sessionId, String dirPath, String col) throws IOException, ParseException, InterruptedException {
+		JSONObject distinctCount = getDistinctCount(sessionId, dirPath, col);
+		JSONObject nullCount = getNullCount(sessionId, dirPath, col);
+		return AnalysisUtils.mergeNullnDistinct(nullCount, distinctCount);
 	}
 
 

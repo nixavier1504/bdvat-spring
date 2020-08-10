@@ -39,7 +39,6 @@ public class LivyController {
 	@Autowired
 	private MongoService mongo;
 	
-	@CrossOrigin(origins = "*")
 	@PostMapping("/schema")
 	public JSONArray getSchema(@RequestBody Schema payload) throws Exception {
 		log.trace("Request for Schema");
@@ -80,7 +79,7 @@ public class LivyController {
 	public JSONObject getNullCount(@RequestBody NullCount payload) throws Exception {
 		log.trace("Request for Null Count");
 		Long sessionId = session.getSparkSession(payload.getUsername());
-		JSONObject stats = analysis.getNullCount(sessionId, payload.getDataset(), payload.getColumn());
+		JSONObject stats = analysis.getNullnDistinct(sessionId, payload.getDataset(), payload.getColumn());
 		mongo.saveNullCount(payload, stats);
 		return stats;
 	}

@@ -21,7 +21,7 @@ public class AnalysisUtils {
 			fieldObject.put("fieldName", (String)field);
 			fieldObject.put("dataType", dataType);
 			fieldObject.put("id", i);
-			fieldObject.put("selected", !dataType.equalsIgnoreCase("StringType"));
+			fieldObject.put("isSelected", !dataType.equalsIgnoreCase("StringType"));
 			schemaArray.add(fieldObject);
 			i++;
 		}
@@ -86,6 +86,23 @@ public class AnalysisUtils {
 		JSONObject responseObj = new JSONObject();
 		responseObj.put("field", field);
 		responseObj.put("nullCount", count);
+		return responseObj;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static JSONObject processDistinctCount(String field, Long count) {
+		JSONObject responseObj = new JSONObject();
+		responseObj.put("field", field);
+		responseObj.put("distinctCount", count);
+		return responseObj;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static JSONObject mergeNullnDistinct(JSONObject nullCount, JSONObject distinctCount) {
+		JSONObject responseObj = new JSONObject();
+		responseObj.put("field", nullCount.get("field"));
+		responseObj.put("nullCount", nullCount.get("nullCount"));
+		responseObj.put("distinctCount", distinctCount.get("distinctCount"));
 		return responseObj;
 	}
 	
