@@ -114,6 +114,8 @@ public class MongoServiceImpl implements MongoService {
 		entry = schemaRepo.save(entry);
 		Update update = new Update();
 		update.addToSet("schema", entry);
+		update.push("profiles", payload.getProfile());
+		update.push("datasets", payload.getDataset());
 		Criteria criteria = Criteria.where("id").is(payload.getExecutionId());
 		template.updateFirst(Query.query(criteria), update, AnalysisHistory.class);
 	}

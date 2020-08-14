@@ -14,7 +14,7 @@ public interface HistoryRepo extends MongoRepository<AnalysisHistory, String> {
 	@Query(value = "{'username': ?0}")
 	List<AnalysisHistory> getHistoryByUser(String username);
 	
-	@Query(value = "{'username': ?0}", fields = "{'timestamp':1}")
+	@Query(value = "{'username': ?0}", fields = "{'timestamp':1, 'profiles': 1, 'datasets': 1}")
 	List<AnalysisHistory> getTimeStampsByUsername(String username);
 	
 }

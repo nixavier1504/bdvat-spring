@@ -23,6 +23,9 @@ public class AnalysisHistory {
 	private String username;
 	private Date timestamp;
 	
+	private List<String> profiles;
+	private List<String> datasets;
+	
 	@DBRef
 	private List<SchemaHistory> schema;
 	
