@@ -114,8 +114,8 @@ public class AnalysisUtils {
 		
 		JSONObject linearRegObj = (JSONObject)stats.get(0);
 		linearRegObj.remove("idx");
-		linearRegObj.put("rmse", (Double) linearRegObj.get("name"));
-		linearRegObj.put("r2", (Double) linearRegObj.get("score"));
+		linearRegObj.put("rmse", String.format("%f",(Double) linearRegObj.get("name")));
+		linearRegObj.put("r2", String.format("%f",(Double) linearRegObj.get("score")));
 		linearRegObj.remove("name");
 		linearRegObj.remove("score");
 		linearRegObj.put("algorithm", "Linear Regression");
@@ -123,16 +123,25 @@ public class AnalysisUtils {
 		
 		JSONObject randomForObj = (JSONObject)stats.get(1);
 		randomForObj.remove("idx");
-		randomForObj.remove("idx");
-		randomForObj.put("rmse", (Double) randomForObj.get("name"));
-		randomForObj.put("r2", (Double) randomForObj.get("score"));
+		randomForObj.put("rmse", String.format("%f",(Double) randomForObj.get("name")));
+		randomForObj.put("r2", String.format("%f",(Double) randomForObj.get("score")));
 		randomForObj.remove("name");
 		randomForObj.remove("score");
 		randomForObj.put("algorithm", "Random Forest");
 		predictions.add(randomForObj);
 		
+		JSONObject gradientBoostObj = (JSONObject)stats.get(2);
+		gradientBoostObj.remove("idx");
+		gradientBoostObj.put("rmse", String.format("%f", (Double) gradientBoostObj.get("name")));
+		gradientBoostObj.put("r2", String.format("%f", (Double) gradientBoostObj.get("score")));
+		gradientBoostObj.remove("name");
+		gradientBoostObj.remove("score");
+		gradientBoostObj.put("algorithm", "Gradient Boost");
+		predictions.add(gradientBoostObj);
+		
 		result.put("result", predictions);
 		
+		stats.remove(0);
 		stats.remove(0);
 		stats.remove(0);
 		JSONArray featureImpArr = new JSONArray();
